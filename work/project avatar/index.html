@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>Random Avatar Generator</title>
+        <script src="multiavatar.min.js"></script>
+        <link rel="shortcut icon" href="log.ico" type="image/x-icon">
+        <script>
+            function idgen(){
+                let vals = "abcdefghijlmnopqrstuvwxyz";
+                msg = "";
+                let size = Math.floor((Math.random()*26)+1);
+                for (let int = 0; int < size; int++) {
+                    let x = Math.floor((Math.random() * 25) + 0);
+                    msg = msg + vals[x];
+                }
+                console.log(msg);
+                return msg;
+            }
+            function generate(){
+                var avatarId = idgen();
+                var svgCode = multiavatar(avatarId);
+                return svgCode
+            }
+            function crt(){
+                let data = generate();
+                document.getElementById("img").innerHTML = data;
+                document.getElementById("data").innerHTML = data;
+            }
+        </script>
+        <style>
+            body{
+                background-color: #23272e;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                height: 97%;
+                width: 98%;
+            }
+            button{
+                height: 10%;
+                aspect-ratio: 3/1;
+                border-radius: 2rem;
+                font-family: monospace;
+                font-size: 30;
+                background-color: #48505e;
+                color: white;
+                cursor: pointer;
+            }
+            #img{
+                height:60%;
+                aspect-ratio: 1/1;
+            }
+            @media all and (orientation:portrait) {
+                body{
+                    flex-direction: column;
+                }
+                #img{
+                    height: 40%;
+                }
+            }
+            @media all and (orientation:landscape) {
+                body{
+                    flex-direction: row;
+                }
+                #img{
+                    height: 60%;
+                }
+            }
+            label{
+                color: #ddd;
+                font-size: 40;
+                font-family: monospace;
+            }
+            textarea{
+                height: 60%;
+                width: 100%;
+                background-color: #48505e;
+                color: white;
+                padding: 5%;
+            }
+        </style>
+    </head>
+    <body onload="crt()">
+        <div id="img">
+
+        </div>
+        <div class="data" style="height: 100%;display: flex;flex-direction: column;justify-content: space-around;">
+            <label style="place-items: center;display: grid;">SVG Code</label>
+            <textarea name="" id="data" cols="60" rows="30"></textarea>
+            <button onclick="crt()" >Regenerate</button>
+        </div>
+    </body>
+</html>
