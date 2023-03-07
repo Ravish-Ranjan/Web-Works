@@ -1,2 +1,0 @@
-Random Avatar Generator
-generates random svg avatar for you to use
