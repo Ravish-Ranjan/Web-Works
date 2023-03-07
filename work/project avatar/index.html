@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <title>Random Avatar Generator</title>
+        <script src="multiavatar.min.js"></script>
+        <link rel="shortcut icon" href="log.ico" type="image/x-icon">
+        <script>
+            function idgen(){
+                let vals = "abcdefghijlmnopqrstuvwxyz";
+                msg = "";
+                let size = Math.floor((Math.random()*26)+1);
+                for (let int = 0; int < size; int++) {
+                    let x = Math.floor((Math.random() * 25) + 0);
+                    msg = msg + vals[x];
+                }
+                console.log(msg);
+                return msg;
+            }
+            function generate(){
+                var avatarId = idgen();
+                var svgCode = multiavatar(avatarId);
+                return svgCode
+            }
+            function crt(){
+                let data = generate();
+                document.getElementById("img").innerHTML = data;
+                document.getElementById("data").innerHTML = data;
+            }
+            function user(){
+                var avatarId = document.getElementById("userd").value;
+                var svgCode = multiavatar(avatarId);
+                document.getElementById("img").innerHTML = svgCode;
+                document.getElementById("data").innerHTML = svgCode;
+            }
+        </script>
+        <style>
+            body{
+                background-color: #23272e;
+                background-image: url("back.jpg");
+                background-size:contain;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                height: 97%;
+                width: 98%;
+            }
+            .user{
+                display: flex;
+                justify-content: space-evenly;
+                /* justify-content: center; */
+            }
+            .user > input[type="text"]{
+                border-radius: 1rem;
+                background-color: #48505e;
+                color: white;
+                padding: 0 5%;
+                font-family: monospace;
+                font-size: 17;
+            }
+            .user > input[type="button"]{
+                height: 100%;
+                padding: 0 5%;
+                border-radius: 1rem;
+                font-family: monospace;
+                font-size: 30;
+                background-color: #48505e;
+                color: white;
+                cursor: pointer;
+            }
+            button{
+                height: 10%;
+                aspect-ratio: 3/1;
+                border-radius: 1rem;
+                font-family: monospace;
+                font-size: 30;
+                background-color: #48505e;
+                color: white;
+                cursor: pointer;
+            }
+            #img{
+                height:60%;
+                aspect-ratio: 1/1;
+                padding: 5%;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.12);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(7.2px);
+                -webkit-backdrop-filter: blur(7.2px);
+            }
+            @media all and (orientation:portrait) {
+                body{
+                    flex-direction: column;
+                }
+                #img{
+                    height: 40%;
+                }
+            }
+            @media all and (orientation:landscape) {
+                body{
+                    flex-direction: row;
+                }
+                #img{
+                    height: 60%;
+                }
+            }
+            label{
+                color: #ddd;
+                font-size: 40;
+                font-weight: bold;
+                font-family: monospace;
+            }
+            textarea{
+                height: 60%;
+                width: 100%;
+                background-color: #48505e;
+                color: white;
+                padding: 5%;
+            }
+        </style>
+    </head>
+    <body onload="crt()">
+        <div id="img">
+
+        </div>
+        <div class="data" style="height: 100%;display: flex;flex-direction: column;justify-content: space-around;">
+            <label style="place-items: center;display: grid;">SVG Code</label>
+            <textarea name="" id="data" cols="60" rows="30"></textarea>
+            <div class="user"><input type="text" placeholder="Enter the Text for Image" id="userd"><input type="button" onclick="user()" value="Generate"></div>
+            <button onclick="crt()" >Random Generate</button>
+        </div>
+    </body>
+</html>
